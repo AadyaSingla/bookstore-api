@@ -1,4 +1,5 @@
-import com.example.bookstore.Book;
+package com.example.bookstore;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
