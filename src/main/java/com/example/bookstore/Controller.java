@@ -5,30 +5,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/bookstore")
 public class Controller {
-    static ArrayList<Book> inventur = new ArrayList<Book>();
+    static ArrayList<Book> inventory = new ArrayList<Book>();
     static {
-        inventur.add(new Book("1","first","author_1",100));
-        inventur.add(new Book("2","second","author_2",200));
-        inventur.add(new Book("3","third","author_3",300));
-        inventur.add(new Book("4","fourth","author_3",400));
+        inventory.add(new Book("1","first","author_1",100));
+        inventory.add(new Book("2","second","author_2",200));
+        inventory.add(new Book("3","third","author_3",300));
+        inventory.add(new Book("4","fourth","author_3",400));
     }
-    public Book book;
 
 
-    @GetMapping("/books")
+    @GetMapping("")
     public ArrayList<Book> getBooks() {
-        return inventur;
+        return inventory;
     }
 
-    @PostMapping("/books")
-    public void addBook(Book book) {
-        inventur.add(book);
+    @PostMapping("")
+    public void addBook(@RequestBody Book book) {
+        inventory.add(book);
     }
 
-    @PostMapping("/books/{id}")
+    @GetMapping("/{id}")
     public Book getBookById(@PathVariable String id) {
-        for (Book book : inventur) {
+        for (Book book : inventory) {
             if (book.getId().equals(id)) {
                 return book;
             } else System.out.println("book doesn't exist");
@@ -36,8 +36,12 @@ public class Controller {
         return null;
     }
 
-    @DeleteMapping("/books/{id}")
-    public void deleteBook() {
-        inventur.clear();
+    @DeleteMapping("/{id}")
+    public void deleteBook(@PathVariable String id) {
+        for (Book book : inventory) {
+            if (book.getId().equals(id)) {
+                inventory.remove(book);
+            } else System.out.println("book doesn't exist");
+        }
     }
 }
