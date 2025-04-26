@@ -8,9 +8,14 @@ import java.util.ArrayList;
 public class Controller {
     static ArrayList<Book> inventur = new ArrayList<Book>();
     static {
-        inventur.add(new Book("1","A","B","2"));
+        inventur.add(new Book("1","first","author_1",100));
+        inventur.add(new Book("2","second","author_2",200));
+        inventur.add(new Book("3","third","author_3",300));
+        inventur.add(new Book("4","fourth","author_3",400));
     }
     public Book book;
+
+
     @GetMapping("/books")
     public ArrayList<Book> getBooks() {
         return inventur;
@@ -21,6 +26,15 @@ public class Controller {
         inventur.add(book);
     }
 
+    @PostMapping("/books/{id}")
+    public Book getBookById(@PathVariable String id) {
+        for (Book book : inventur) {
+            if (book.getId().equals(id)) {
+                return book;
+            } else System.out.println("book doesn't exist");
+        }
+        return null;
+    }
 
     @DeleteMapping("/books/{id}")
     public void deleteBook() {

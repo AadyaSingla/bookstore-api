@@ -6,19 +6,15 @@ public class Book {
     public String author;
     public int price;
 
-    public Book(String number, String mathe, String baumann, String number1) {
+    public Book(String number, String title, String author, int price) {
         this.id = number;
         this.title = title;
         this.author = author;
-        this.price = Integer.parseInt(number1);
+        this.price = price;
     }
 
     public String getId() {
         return this.id;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
 }
